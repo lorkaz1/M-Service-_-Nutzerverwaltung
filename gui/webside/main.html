@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nutzerverwaltung</title>
+    <link rel="stylesheet" href="main.css">
+    <script src="main.js" defer></script>
+    
+</head>
+<body>
+    <p>
+        Nutzererstellen und Nutzerlöschen! <br>
+        <br>
+    </p>
+
+    <div class="form-zeile">
+        <div class="form-gruppe">
+            <label for="name">Name</label>
+            <input type="text" id="txtName"></input>
+        </div>
+        
+        <div class="form-gruppe">
+            <label for="password">Password</label>
+            <input type="text" id="txtPassword"></input>
+        </div>
+    </div>
+
+    <br>
+
+    <button id="btnErstellen" onclick="erstellen()">Erstellen</button> 
+    <button id="btnLoeschen" onclick="loeschen()">Löschen</button>
+    <br>
+    <br>
+    <label id="lblAntwort">Ergebnis...</label>
+
+
+    
+</body>
+</html>

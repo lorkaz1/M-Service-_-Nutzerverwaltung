@@ -1,0 +1,73 @@
+services:
+  DB:
+    image: mongo:latest
+    container_name: Nutzer-DB
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: password
+    ports:
+      - "27017:27017"
+    volumes:
+      - ./MongoDB-DB:/docker-entrypoint-initdb.d
+  
+
+
+  nutzervorhanden:
+    build: 
+      context: ./nutzervorhanden
+    container_name: nutzervorhanden
+    depends_on:
+      - DB
+    ports:
+      - "3006:3006"
+    volumes:
+      - ./nutzervorhanden:/app
+    working_dir: /app
+    command: npm run dev
+
+
+
+
+  nutzererstellen:
+    build: 
+      context: ./nutzererstellen
+    container_name: nutzererstellen
+    depends_on:
+      - nutzervorhanden
+    ports:
+      - "3007:3007"
+    volumes:
+      - ./nutzererstellen:/app
+    working_dir: /app
+    command: npm run dev
+
+
+
+
+  nutzerloeschen:
+    build: 
+      context: ./nutzerloeschen
+    container_name: nutzerloeschen
+    depends_on:
+      - nutzervorhanden
+    ports:
+      - "3008:3008"
+    volumes:
+      - ./nutzerloeschen:/app
+    working_dir: /app
+    command: npm run dev
+
+  gui:
+    build: 
+      context: ./gui
+    container_name: gui
+    depends_on:
+      - nutzerloeschen
+      - nutzererstellen
+    ports:
+      - "3001:3001"
+    volumes:
+      - ./gui:/app
+    working_dir: /app
+    command: npm run dev
+ 
